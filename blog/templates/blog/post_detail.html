@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <div class='row'>
+        {% include 'blog/list-inline.html' with blog_post=post detail=True %}
+        {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
+            <div class='col-12'>
+                <a href='{% url "post_update" post.id %}'>Edit</a>
+                <a href='{% url "post_delete" post.id %}'>Delete</a>
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,7 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import timezone
+
+from .models import Post
 from .forms import PostForm
+
 
 
 def post_list(request):
@@ -12,6 +16,7 @@ def post_list(request):
     return render(request, 'blog/post_list.html', context)
 
 
+@staff_member_required
 def post_create(request):
     form = PostForm()
     if request.method == "POST":  
@@ -29,6 +34,7 @@ def post_create(request):
     return render(request, 'blog/post_create.html', context)
 
 
+@staff_member_required
 def post_update(request, id):  
     post = get_object_or_404(Post, id=id)
     form = PostForm(request.POST or None, instance = post)  
@@ -41,6 +47,7 @@ def post_update(request, id):
     return render(request, 'blog/post_create.html', context)  
 
 
+@staff_member_required
 def post_delete(request, id):
     context ={}
  
@@ -52,3 +59,10 @@ def post_delete(request, id):
         return redirect("post_list")
  
     return render(request, "blog/post_delete.html", context)
+
+
+
+def post_detail(request, id):
+    post = get_object_or_404(Post, id=id)
+    context = {"post": post}
+    return render(request, 'blog/post_detail.html', context) 

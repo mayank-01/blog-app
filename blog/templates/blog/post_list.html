@@ -2,16 +2,10 @@
 
 {% block content %}
 
-{% for post in posts %}
-    <div class="card mt-5">
-        <div class="card-body">
-        <h3 class="card-title">{{post.title}}</h3>
-        <h6 class="card-subtitle mb-2 text-muted">Published On: {{post.published_date}}</h6>
-        <p class="card-text">{{post.text}}</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-        </div>
+  <div class='row'>
+    {% for post in posts %}
+        {% include 'blog/list-inline.html' with blog_post=post truncate=True detail=False %}
+    {% endfor %}
   </div>
-{% endfor %}
 
 {% endblock %}
