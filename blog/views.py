@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils import timezone
+from django.template.response import TemplateResponse
 
 from .models import Post
 from .forms import PostForm
@@ -9,7 +10,8 @@ from .forms import PostForm
 
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte = timezone.now()).order_by('published_date')
+    #posts = Post.objects.filter(published_date__lte = timezone.now()).order_by('published_date')
+    posts = Post.objects.all()
     context = {
         'posts': posts
     }
@@ -65,4 +67,18 @@ def post_delete(request, id):
 def post_detail(request, id):
     post = get_object_or_404(Post, id=id)
     context = {"post": post}
-    return render(request, 'blog/post_detail.html', context) 
+    return render(request, 'blog/post_detail.html', context)
+
+
+
+# For practicing Middleware
+def excp(request):
+    print("I am Excp View")
+    a = 10/0
+    return HttpResponse("This is Excp page")
+
+
+def user_info(request):
+    print("I am User Info View")
+    context = {'name': 'Rahul'}
+    return TemplateResponse(request, 'blog/user.html', context)

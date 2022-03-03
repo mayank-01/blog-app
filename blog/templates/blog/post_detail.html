@@ -9,8 +9,10 @@
             <div class='col-12'>
                 <a href='{% url "post_update" post.id %}'>Edit</a>
                 <a href='{% url "post_delete" post.id %}'>Delete</a>
+
+                {% if post.published_date is None %}<button onclick="{{ post.publish }}">Publish</button>{% endif %}
             </div>
             {% endif %}
         {% endif %}
     </div>
-{% endblock %}
+{% endblock %}[]
