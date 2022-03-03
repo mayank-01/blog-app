@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog.apps.BlogConfig'
+    'blog.apps.BlogConfig',
+    'blog_class'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ MIDDLEWARE = [
     # 'blog.middlewares.my_middleware3',
     # 'blog.middlewares.MyProcessMiddleware',
     # 'blog.middlewares.MyExceptionMiddleware',
-    'blog.middlewares.MyTemplateResponseMiddleware',
+    #'blog.middlewares.MyTemplateResponseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
